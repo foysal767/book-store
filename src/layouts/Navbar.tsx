@@ -39,17 +39,17 @@ export default function Navbar() {
               </li>
               <li>
                 <Button variant="link" asChild>
-                  <Link to="/products">All Books</Link>
+                  <Link to="/all-books">All Books</Link>
                 </Button>
               </li>
               <li>
                 <Button variant="link" asChild>
-                  <Link to="/checkout">Sign In</Link>
+                  <Link to="/login">Sign In</Link>
                 </Button>
               </li>
               <li>
                 <Button variant="link" asChild>
-                  <Link to="/checkout">Sign Up</Link>
+                  <Link to="/signup">Sign Up</Link>
                 </Button>
               </li>
               <li>

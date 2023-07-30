@@ -54,6 +54,9 @@ export default function Home() {
                     Publication: Publication Date
                   </p>
                 </div>
+                <Button className="mt-10" asChild>
+                  <Link to="/book-details/:id">View Details</Link>
+                </Button>
               </div>
             </div>
 
