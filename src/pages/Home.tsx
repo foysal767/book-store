@@ -2,18 +2,17 @@ import { Link } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import Footer from "../layouts/Footer";
 import banner from "../assets/images/banner-image.jpg";
-import { useEffect, useState } from "react";
 import { IBook } from "../types/globalTypes";
-// import { IBook } from "../types/globalTypes";
+import { recentBooks } from "../redux/features/books/booksSlice";
+import { useAppDispatch } from "../redux/hook";
+import { useGetRecentBooksQuery } from "../redux/features/books/booksApi";
 
 export default function Home() {
-  const [books, setBooks] = useState([]);
-  useEffect(() => {
-    fetch("http://localhost:5000/recent-book")
-      .then((res) => res.json())
-      .then((data) => setBooks(data.data));
-  }, []);
-  console.log(books);
+  const dispatch = useAppDispatch();
+  dispatch(recentBooks());
+  console.log(dispatch, "dispatch");
+  const { data } = useGetRecentBooksQuery(undefined);
+  const books = data?.data;
   return (
     <>
       <div className="w-100vw px-10">
