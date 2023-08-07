@@ -5,6 +5,9 @@ const booksApi = api.injectEndpoints({
     getRecentBooks: builder.query({
       query: () => "/recent-book",
     }),
+    getAllBooks: builder.query({
+      query: () => "/all-books",
+    }),
   }),
 });
-export const { useGetRecentBooksQuery } = booksApi;
+export const { useGetRecentBooksQuery, useGetAllBooksQuery } = booksApi;

@@ -4,6 +4,6 @@ export interface IBook {
   author: string;
   img: string;
   genre: string;
-  publication: string;
+  publication: number;
   comment: string[];
 }

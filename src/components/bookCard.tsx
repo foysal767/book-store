@@ -1,38 +1,40 @@
-// import { IProduct } from "@/types/globalTypes";
-// import { toast } from "./ui/use-toast";
-// import { Button } from "./ui/button";
-// import { Link } from "react-router-dom";
-// import { useAppDispatch } from "@/redux/hook";
-// import { addToCart } from "@/redux/features/cart/cartSlice";
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable prefer-const */
+import { Link } from "react-router-dom";
+import { Button } from "./ui/button";
+import { allBooks } from "../redux/features/books/booksSlice";
+import { IBook } from "../types/globalTypes";
+import { useAppDispatch } from "../redux/hook";
+// import { useGetAllBooksQuery } from "../redux/features/books/booksApi";
 
-// interface IProps {
-//   product: IProduct;
-// }
-
-// export default function BookCard({ product }: IProps) {
-//   const dispatch = useAppDispatch();
-//   const handleAddProduct = (product: IProduct) => {
-//     dispatch(addToCart(product));
-//     toast({
-//       description: "Product Added",
-//     });
-//   };
-//   return (
-//     <div>
-//       <div className="rounded-2xl h-[480px] flex flex-col items-start justify-between p-5 overflow-hidden shadow-md border border-gray-100 hover:shadow-2xl hover:scale-[102%] transition-all gap-2">
-//         <Link to={`/product-details/${product._id}`} className="w-full">
-//           <img src={product?.image} alt="product" />
-//           <h1 className="text-xl font-semibold">{product?.name}</h1>
-//         </Link>
-//         <p>Rating: {product?.rating}</p>
-//         <p className="text-sm">
-//           Availability: {product?.status ? "In stock" : "Out of stock"}
-//         </p>
-//         <p className="text-sm">Price: {product?.price}</p>
-//         <Button variant="default" onClick={() => handleAddProduct(product)}>
-//           Add to cart
-//         </Button>
-//       </div>
-//     </div>
-//   );
-// }
+interface IProps {
+  book: IBook;
+}
+export default function BookCard({ book }: IProps) {
+  const dispatch = useAppDispatch();
+  dispatch(allBooks());
+  return (
+    <div className="w-full md:w-1/3 lg:w-1/4 px-4 py-4 mb-4 mx-4 my-4 overflow-hidden rounded-lg shadow-md dark:bg-gray-900 dark:text-gray-100">
+      <div className="flex space-x-2">
+        <div className="flex flex-col space-y-1">
+          <h2 className="mb-1 text-xl font-semibold">{book.title}</h2>
+        </div>
+      </div>
+      <div>
+        <img
+          src={book.img}
+          alt=""
+          className="object-cover w-full mb-4 h-60 sm:h-96 dark:bg-gray-500"
+        />
+        <h2 className="mb-1 text-xl font-normal">Author: {book.author}</h2>
+        <p className="text-sm dark:text-gray-400">Genre: {book.genre}</p>
+        <p className="text-sm dark:text-gray-400">
+          Publication Date:{book.publication}
+        </p>
+      </div>
+      <Button className="mt-10" asChild>
+        <Link to="/book-details/:id">View Details</Link>
+      </Button>
+    </div>
+  );
+}
