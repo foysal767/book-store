@@ -4,10 +4,12 @@ import { IBook } from "../../../types/globalTypes";
 interface IRecentBook {
   books: IBook[];
   publicationRange: number;
+  searchBooks: string;
 }
 const initialState: IRecentBook = {
   books: [],
-  publicationRange: 1800,
+  publicationRange: 2023,
+  searchBooks: "",
 };
 
 const booksSlice = createSlice({
@@ -23,8 +25,11 @@ const booksSlice = createSlice({
     setPublicationRange: (state, action: PayloadAction<number>) => {
       state.publicationRange = action.payload;
     },
+    getSearchBooks: (state, action: PayloadAction<string>) => {
+      state.searchBooks = action.payload;
+    },
   },
 });
-export const { recentBooks, allBooks, setPublicationRange } =
+export const { recentBooks, allBooks, setPublicationRange, getSearchBooks } =
   booksSlice.actions;
 export default booksSlice.reducer;
