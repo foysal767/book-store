@@ -23,7 +23,7 @@ export default function AllBooks() {
   };
 
   const handleSearchBooks = (event: any) => {
-    dispatch(getSearchBooks(event.target.value));
+    dispatch(getSearchBooks(event.target.value.toLowerCase()));
   };
 
   let books;
@@ -33,18 +33,32 @@ export default function AllBooks() {
       (item: { publication: number }) => item.publication <= publicationRange
     );
     if (searchBooks) {
-      searchData = books?.filter(
-        (item: { genre: string }) => item.genre == searchBooks
-      );
+      searchData = books?.filter((item: IBook) => {
+        const lowerCaseGenre = item.genre.toLowerCase();
+        const lowerCaseTitle = item.title.toLowerCase();
+        const lowerCaseAuthor = item.author.toLowerCase();
+        return (
+          lowerCaseGenre.includes(searchBooks) ||
+          lowerCaseTitle.includes(searchBooks) ||
+          lowerCaseAuthor.includes(searchBooks)
+        );
+      });
     } else {
       searchData = books;
     }
   } else {
     books = data?.data;
     if (searchBooks) {
-      searchData = books?.filter(
-        (item: { genre: string }) => item.genre == searchBooks
-      );
+      searchData = books?.filter((item: IBook) => {
+        const lowerCaseGenre = item.genre.toLowerCase();
+        const lowerCaseTitle = item.title.toLowerCase();
+        const lowerCaseAuthor = item.author.toLowerCase();
+        return (
+          lowerCaseGenre.includes(searchBooks) ||
+          lowerCaseTitle.includes(searchBooks) ||
+          lowerCaseAuthor.includes(searchBooks)
+        );
+      });
     } else {
       searchData = books;
     }
