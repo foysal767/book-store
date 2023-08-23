@@ -3,6 +3,7 @@ import logo from "../assets/images/logo-book-store.png";
 // import { LoginForm } from "@/components/LoginForm";
 import { cn } from "../lib/utils";
 import { buttonVariants } from "../components/ui/button";
+import { LoginForm } from "../components/LoginForm";
 
 export default function Login() {
   return (
@@ -44,7 +45,7 @@ export default function Login() {
                 Enter your email below
               </p>
             </div>
-            {/* <LoginForm /> */}
+            <LoginForm />
             <p className="px-8 text-center text-sm text-muted-foreground">
               By clicking continue, you agree to our{" "}
               <Link

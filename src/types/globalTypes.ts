@@ -5,5 +5,5 @@ export interface IBook {
   img: string;
   genre: string;
   publication: number;
-  comment: string[];
+  comments: string[];
 }

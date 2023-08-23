@@ -88,14 +88,13 @@ export default function AllBooks() {
                 <div>From 1800 To {publicationRange}</div>
               </div>
 
-              <div className="my-4">
-                <h1 className="text-xl uppercase mb-2">
-                  Type Genre to get specific types books
-                </h1>
+              <div className="my-8">
+                <h1 className="text-xl uppercase mb-2">Search Here</h1>
                 <input
                   type="text"
-                  placeholder="Type Genre"
+                  placeholder="Search..."
                   onChange={handleSearchBooks}
+                  className="border-4 border-blue-500 rounded-md"
                 />
               </div>
             </div>

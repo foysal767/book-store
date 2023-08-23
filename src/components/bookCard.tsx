@@ -33,7 +33,7 @@ export default function BookCard({ book }: IProps) {
         </p>
       </div>
       <Button className="mt-10" asChild>
-        <Link to="/book-details/:id">View Details</Link>
+        <Link to={`/singleBook/${book._id}`}>View Details</Link>
       </Button>
     </div>
   );
