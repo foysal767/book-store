@@ -29,7 +29,6 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const onSubmit = (data: LoginFormInputs) => {
-    console.log(data);
     dispatch(loginUser({ email: data.email, password: data.password }));
   };
   React.useEffect(() => {

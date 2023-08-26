@@ -36,12 +36,6 @@ const booksSlice = createSlice({
       state.searchBooks = action.payload;
     },
   },
-  // extraReducers: (builder) => {
-  //   builder.addCase(addBook.fulfilled, (state, action) => {
-  //     console.log(addBook, "add book from bookslice");
-  //     state.books.push(action.payload);
-  //   });
-  // },
 });
 export const { recentBooks, allBooks, setPublicationRange, getSearchBooks } =
   booksSlice.actions;

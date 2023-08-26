@@ -31,7 +31,6 @@ export default function BookReview({ id }: IProps) {
   console.log(isLoading, isError);
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(inputValue);
     const options = {
       id: id,
       data: { comment: inputValue },

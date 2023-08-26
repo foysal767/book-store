@@ -4,15 +4,27 @@
 
 import { Button } from "../components/ui/button";
 
-import { useParams } from "react-router-dom";
-import { useSingleBookQuery } from "../redux/features/books/booksApi";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  useDeleteBookMutation,
+  useSingleBookQuery,
+} from "../redux/features/books/booksApi";
 import BookReview from "../components/BookReview";
 
 export default function BookDetails() {
   const { id } = useParams();
-
   const { data: book } = useSingleBookQuery(id);
-  console.log(book, "data from book details page");
+  const [deleteBook] = useDeleteBookMutation();
+  const navigate = useNavigate();
+
+  const handleDeleteBook = async () => {
+    try {
+      await deleteBook(id);
+      navigate("/");
+    } catch (error) {
+      console.error("Error deleting book:", error);
+    }
+  };
 
   return (
     <>
@@ -27,7 +39,12 @@ export default function BookDetails() {
           <p className="text-xl">Publication Date: {book?.publication}</p>
           <div className="flex w-4/12 gap-4">
             <Button>Edit</Button>
-            <Button className="bg-red-500 hover:bg-black">Delete</Button>
+            <Button
+              className="bg-red-500 hover:bg-black"
+              onClick={handleDeleteBook}
+            >
+              Delete
+            </Button>
           </div>
         </div>
       </div>

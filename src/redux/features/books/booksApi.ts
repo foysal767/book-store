@@ -1,5 +1,6 @@
 import { IBook } from "../../../types/globalTypes";
 import { api } from "../../api/apiSlice";
+// import { FullTagDescription } from "@reduxjs/toolkit/dist/query";
 
 const booksApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -12,13 +13,20 @@ const booksApi = api.injectEndpoints({
     singleBook: builder.query({
       query: (id) => `/book/${id}`,
     }),
+    deleteBook: builder.mutation({
+      query: (id) => ({
+        url: `/book/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["books"],
+    }),
     bookComment: builder.mutation({
       query: ({ id, data }) => ({
         url: `/comment/${id}`,
         method: "POST",
         body: data,
       }),
-      // invalidatesTags: ["comments"],
+      invalidatesTags: ["comments"],
     }),
     addNewBook: builder.mutation<IBook, Partial<IBook>>({
       query: (newBook) => ({
@@ -29,7 +37,7 @@ const booksApi = api.injectEndpoints({
     }),
     getComment: builder.query({
       query: (id) => `/comment/${id}`,
-      // providesTags: ["comments"],
+      providesTags: ["comments"],
     }),
   }),
 });
@@ -40,4 +48,5 @@ export const {
   useSingleBookQuery,
   useBookCommentMutation,
   useGetCommentQuery,
+  useDeleteBookMutation,
 } = booksApi;

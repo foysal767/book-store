@@ -10,7 +10,6 @@ import { useGetRecentBooksQuery } from "../redux/features/books/booksApi";
 export default function Home() {
   const dispatch = useAppDispatch();
   dispatch(recentBooks());
-  console.log(dispatch, "dispatch");
   const { data } = useGetRecentBooksQuery(undefined);
   const books = data?.data;
   return (

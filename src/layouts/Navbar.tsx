@@ -22,7 +22,6 @@ export default function Navbar() {
   const { user } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const handleLogout = () => {
-    console.log("logout");
     signOut(auth).then(() => {
       //signout successfull
       dispatch(setUser(null));
