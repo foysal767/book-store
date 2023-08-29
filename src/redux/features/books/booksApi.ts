@@ -6,19 +6,22 @@ const booksApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getRecentBooks: builder.query({
       query: () => "/recent-book",
+      providesTags: [{ type: "books" }],
     }),
     getAllBooks: builder.query({
       query: () => "/all-books",
+      providesTags: [{ type: "books" }],
     }),
     singleBook: builder.query({
       query: (id) => `/book/${id}`,
+      providesTags: ["comment"],
     }),
     deleteBook: builder.mutation({
       query: (id) => ({
         url: `/book/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["books"],
+      invalidatesTags: [{ type: "books" }],
     }),
     bookComment: builder.mutation({
       query: ({ id, data }) => ({
@@ -26,7 +29,7 @@ const booksApi = api.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["comments"],
+      invalidatesTags: ["comment"],
     }),
     addNewBook: builder.mutation<IBook, Partial<IBook>>({
       query: (newBook) => ({
@@ -34,10 +37,11 @@ const booksApi = api.injectEndpoints({
         method: "POST",
         body: newBook,
       }),
+      invalidatesTags: [{ type: "books" }],
     }),
     getComment: builder.query({
       query: (id) => `/comment/${id}`,
-      providesTags: ["comments"],
+      providesTags: ["comment"],
     }),
   }),
 });

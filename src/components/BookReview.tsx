@@ -27,8 +27,7 @@ export default function BookReview({ id }: IProps) {
   });
   const [inputValue, setInputValue] = useState<string>("");
 
-  const [postComment, { isLoading, isError }] = useBookCommentMutation();
-  console.log(isLoading, isError);
+  const [postComment] = useBookCommentMutation();
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const options = {
@@ -48,7 +47,7 @@ export default function BookReview({ id }: IProps) {
       </h1>
       <form className="flex gap-5 items-center" onSubmit={handleSubmit}>
         <textarea
-          className="min-h-[80px] w-1/3 border-2 border-black rounded-xl"
+          className="min-h-[80px] w-1/3 border-2 border-black rounded-xl p-2"
           onChange={handleChange}
           value={inputValue}
         />

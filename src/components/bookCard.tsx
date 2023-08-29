@@ -29,7 +29,7 @@ export default function BookCard({ book }: IProps) {
         <h2 className="mb-1 text-xl font-normal">Author: {book.author}</h2>
         <p className="text-sm dark:text-gray-400">Genre: {book.genre}</p>
         <p className="text-sm dark:text-gray-400">
-          Publication Date:{book.publication}
+          Publication Year: {book.publication}
         </p>
       </div>
       <Button className="mt-10" asChild>

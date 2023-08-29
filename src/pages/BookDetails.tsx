@@ -10,12 +10,44 @@ import {
   useSingleBookQuery,
 } from "../redux/features/books/booksApi";
 import BookReview from "../components/BookReview";
+import { useState } from "react";
 
+import Modal from "react-modal";
+import { useForm } from "react-hook-form";
+import { Label } from "../components/ui/label";
+import { Input } from "../components/ui/input";
+// import { AddBookForm } from "../components/AddBookForm";
+
+interface AddBookFormInputs {
+  title: string;
+  author: string;
+  genre: string;
+  publication: number;
+  img: string;
+}
 export default function BookDetails() {
   const { id } = useParams();
   const { data: book } = useSingleBookQuery(id);
   const [deleteBook] = useDeleteBookMutation();
   const navigate = useNavigate();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<AddBookFormInputs>();
+
+  const onSubmit = async (data: AddBookFormInputs) => {
+    console.log(data, "data from edit");
+    const result = data;
+    if (result) {
+      setIsModalOpen(false);
+      reset();
+    }
+  };
 
   const handleDeleteBook = async () => {
     try {
@@ -38,7 +70,7 @@ export default function BookDetails() {
           <p className="text-xl">Genre: {book?.genre}</p>
           <p className="text-xl">Publication Date: {book?.publication}</p>
           <div className="flex w-4/12 gap-4">
-            <Button>Edit</Button>
+            <Button onClick={() => setIsModalOpen(true)}>Edit</Button>
             <Button
               className="bg-red-500 hover:bg-black"
               onClick={handleDeleteBook}
@@ -66,6 +98,86 @@ export default function BookDetails() {
       </div>
 
       {<BookReview id={id!} />}
+
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+        className="w-10/12 mx-auto p-20 bg-white border-2 border-black rounded-xl"
+      >
+        <div className="flex justify-center my-4">
+          <h3 className="font-bold text-lg ">Edit Book: {book?.title} </h3>
+        </div>
+
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="grid gap-2">
+            <div className="grid gap-1">
+              <Label className="sr-only" htmlFor="email">
+                Title
+              </Label>
+              <Input
+                id="title"
+                placeholder="type book title"
+                defaultValue={book?.title}
+                type="text"
+                autoCapitalize="none"
+                autoCorrect="off"
+                {...register("title", { required: "Title is required!" })}
+              />
+              {errors.title && <p>{errors.title.message}</p>}
+              <Input
+                id="author"
+                placeholder="type author name"
+                defaultValue={book?.author}
+                type="text"
+                autoCapitalize="none"
+                autoCorrect="off"
+                {...register("author", { required: "author is required!" })}
+              />
+              {errors.author && <p>{errors.author.message}</p>}
+              <Input
+                id="genre"
+                placeholder="type genre"
+                defaultValue={book?.genre}
+                type="text"
+                autoCapitalize="none"
+                autoCorrect="off"
+                {...register("genre", { required: "genre is required!" })}
+              />
+              {errors.genre && <p>{errors.genre.message}</p>}
+              <Input
+                id="publication"
+                placeholder="type publication"
+                defaultValue={book?.publication}
+                type="text"
+                autoCapitalize="none"
+                autoCorrect="off"
+                {...register("publication", {
+                  required: "publication is required!",
+                })}
+              />
+              {errors.publication && <p>{errors.publication.message}</p>}
+              <Input
+                id="image"
+                placeholder="type image url"
+                defaultValue={book?.img}
+                type="text"
+                autoCapitalize="none"
+                autoCorrect="off"
+                {...register("img", {
+                  required: "image is required!",
+                })}
+              />
+              {errors.img && <p>{errors.img.message}</p>}
+            </div>
+            <Button className="w-2/12 mx-auto">Edit</Button>
+          </div>
+        </form>
+        <div className="modal-action">
+          <button className="btn" onClick={() => setIsModalOpen(false)}>
+            Close
+          </button>
+        </div>
+      </Modal>
     </>
   );
 }
