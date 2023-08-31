@@ -6,6 +6,7 @@ import { Button } from "../components/ui/button";
 
 import { useNavigate, useParams } from "react-router-dom";
 import {
+  useBookEditMutation,
   useDeleteBookMutation,
   useSingleBookQuery,
 } from "../redux/features/books/booksApi";
@@ -16,6 +17,7 @@ import Modal from "react-modal";
 import { useForm } from "react-hook-form";
 import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
+import { toast } from "../components/ui/use-toast";
 // import { AddBookForm } from "../components/AddBookForm";
 
 interface AddBookFormInputs {
@@ -29,6 +31,7 @@ export default function BookDetails() {
   const { id } = useParams();
   const { data: book } = useSingleBookQuery(id);
   const [deleteBook] = useDeleteBookMutation();
+  const [bookEdit] = useBookEditMutation();
   const navigate = useNavigate();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -41,9 +44,11 @@ export default function BookDetails() {
   } = useForm<AddBookFormInputs>();
 
   const onSubmit = async (data: AddBookFormInputs) => {
-    console.log(data, "data from edit");
-    const result = data;
+    const result = await bookEdit({ id, data });
     if (result) {
+      toast({
+        description: `${book?.title} is edited Successfully!`,
+      });
       setIsModalOpen(false);
       reset();
     }
@@ -52,6 +57,9 @@ export default function BookDetails() {
   const handleDeleteBook = async () => {
     try {
       await deleteBook(id);
+      toast({
+        description: "Book Deleted Successfully!",
+      });
       navigate("/");
     } catch (error) {
       console.error("Error deleting book:", error);

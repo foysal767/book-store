@@ -14,7 +14,7 @@ const booksApi = api.injectEndpoints({
     }),
     singleBook: builder.query({
       query: (id) => `/book/${id}`,
-      providesTags: ["comment"],
+      providesTags: [{ type: "books" }, "comment"],
     }),
     deleteBook: builder.mutation({
       query: (id) => ({
@@ -30,6 +30,14 @@ const booksApi = api.injectEndpoints({
         body: data,
       }),
       invalidatesTags: ["comment"],
+    }),
+    bookEdit: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/book/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: [{ type: "books" }],
     }),
     addNewBook: builder.mutation<IBook, Partial<IBook>>({
       query: (newBook) => ({
@@ -53,4 +61,5 @@ export const {
   useBookCommentMutation,
   useGetCommentQuery,
   useDeleteBookMutation,
+  useBookEditMutation,
 } = booksApi;
