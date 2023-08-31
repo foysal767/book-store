@@ -7,6 +7,7 @@ import { Label } from "./ui/label";
 
 import { useAddNewBookMutation } from "../redux/features/books/booksApi";
 import { toast } from "./ui/use-toast";
+import { useNavigate } from "react-router-dom";
 
 type AddBookFormProps = React.HTMLAttributes<HTMLDivElement>;
 interface AddBookFormInputs {
@@ -19,6 +20,7 @@ interface AddBookFormInputs {
 }
 
 export function AddBookForm({ className, ...props }: AddBookFormProps) {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -34,6 +36,7 @@ export function AddBookForm({ className, ...props }: AddBookFormProps) {
     });
     if (result) {
       reset();
+      navigate("/");
     }
   };
 
