@@ -1,7 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   server: {
@@ -10,13 +9,9 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          // Define your manual chunks here
-          // Example: 'lodash': ['lodash'],
-          // ...
-        },
+        manualChunks: {},
       },
     },
-    chunkSizeWarningLimit: 1000, // Adjust this value if needed
+    chunkSizeWarningLimit: 1000,
   },
 });

@@ -1,11 +1,8 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-/* eslint-disable prefer-const */
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import { allBooks } from "../redux/features/books/booksSlice";
 import { IBook } from "../types/globalTypes";
 import { useAppDispatch } from "../redux/hook";
-// import { useGetAllBooksQuery } from "../redux/features/books/booksApi";
 
 interface IProps {
   book: IBook;

@@ -29,17 +29,6 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
     dispatch(createUser({ email: data.email, password: data.password }));
   };
 
-  // const [isLoading, setIsLoading] = React.useState<boolean>(false);
-
-  // async function onSubmit(event: React.SyntheticEvent) {
-  //   event.preventDefault();
-  //   setIsLoading(true);
-
-  //   setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 3000);
-  // }
-
   return (
     <div className={cn("grid gap-6", className)} {...props}>
       <form onSubmit={handleSubmit(onSubmit)}>
