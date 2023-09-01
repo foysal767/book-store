@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { useForm } from "react-hook-form";
 import { loginUser } from "../redux/features/users/usersSlice";
 import { useNavigate } from "react-router-dom";
+import { toast } from "./ui/use-toast";
 
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 interface LoginFormInputs {
@@ -21,13 +22,15 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormInputs>();
-
   const { user, isLoading } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const onSubmit = (data: LoginFormInputs) => {
     dispatch(loginUser({ email: data.email, password: data.password }));
     navigate("/");
+    toast({
+      description: "Successfully login!",
+    });
   };
   React.useEffect(() => {
     if (user.email && !isLoading) {

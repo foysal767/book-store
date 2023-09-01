@@ -30,10 +30,10 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
 
   const onSubmit = (data: SignupFormInputs) => {
     dispatch(createUser({ email: data.email, password: data.password }));
+    navigate("/");
     toast({
       description: "Congratulations! Now, You're a new user",
     });
-    navigate("/");
   };
 
   return (
