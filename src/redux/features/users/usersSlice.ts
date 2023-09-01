@@ -4,7 +4,6 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-
 interface IUserState {
   user: {
     email: string | null;
@@ -13,7 +12,6 @@ interface IUserState {
   isError: boolean;
   error: string | null;
 }
-
 const initialState: IUserState = {
   user: {
     email: null,
@@ -22,12 +20,10 @@ const initialState: IUserState = {
   isError: false,
   error: null,
 };
-
 interface ICredential {
   email: string;
   password: string;
 }
-
 export const createUser = createAsyncThunk(
   "user/createUser",
   async ({ email, password }: ICredential) => {
@@ -35,7 +31,6 @@ export const createUser = createAsyncThunk(
     return data?.user?.email;
   }
 );
-
 export const loginUser = createAsyncThunk(
   "user/loginUser",
   async ({ email, password }: ICredential) => {
@@ -43,7 +38,6 @@ export const loginUser = createAsyncThunk(
     return data?.user?.email;
   }
 );
-
 const usersSlice = createSlice({
   name: "user",
   initialState,

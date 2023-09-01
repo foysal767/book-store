@@ -1,6 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IBook } from "../../../types/globalTypes";
-
 interface IRecentBook {
   books: IBook[];
   publicationRange: number;
@@ -11,14 +10,12 @@ const initialState: IRecentBook = {
   publicationRange: 2023,
   searchBooks: "",
 };
-
 export const addBook = createAsyncThunk(
   "books/addBook",
   async (bookData: IBook) => {
     return bookData;
   }
 );
-
 const booksSlice = createSlice({
   name: "books",
   initialState,

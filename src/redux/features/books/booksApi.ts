@@ -1,6 +1,5 @@
 import { IBook } from "../../../types/globalTypes";
 import { api } from "../../api/apiSlice";
-// import { FullTagDescription } from "@reduxjs/toolkit/dist/query";
 
 const booksApi = api.injectEndpoints({
   endpoints: (builder) => ({
