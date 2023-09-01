@@ -9,6 +9,7 @@ import { Label } from "../components/ui/label";
 import { useForm } from "react-hook-form";
 import { createUser } from "../redux/features/users/usersSlice";
 import { useAppDispatch } from "../redux/hook";
+import { useNavigate } from "react-router-dom";
 
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -24,9 +25,11 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
     formState: { errors },
   } = useForm<SignupFormInputs>();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const onSubmit = (data: SignupFormInputs) => {
     dispatch(createUser({ email: data.email, password: data.password }));
+    navigate("/");
   };
 
   return (
