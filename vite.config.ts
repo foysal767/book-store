@@ -7,4 +7,16 @@ export default defineConfig({
   server: {
     port: 3000,
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Define your manual chunks here
+          // Example: 'lodash': ['lodash'],
+          // ...
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000, // Adjust this value if needed
+  },
 });

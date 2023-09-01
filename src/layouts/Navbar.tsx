@@ -2,7 +2,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
 import { Button } from "../components/ui/button";
 import { DropdownMenuSeparator } from "../components/ui/dropdown-menu";
-import { DropdownMenuLabel } from "../components/ui/dropdown-menu";
 import {
   DropdownMenuItem,
   DropdownMenu,
