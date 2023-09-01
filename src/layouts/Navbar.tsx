@@ -16,13 +16,16 @@ import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { signOut } from "firebase/auth";
 import { setUser } from "../redux/features/users/usersSlice";
 import { auth } from "../lib/firebase";
+import { toast } from "../components/ui/use-toast";
 
 export default function Navbar() {
   const { user } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const handleLogout = () => {
     signOut(auth).then(() => {
-      //signout successfull
+      toast({
+        description: "Successfully Logout",
+      });
       dispatch(setUser(null));
     });
   };

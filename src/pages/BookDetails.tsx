@@ -1,9 +1,4 @@
-// import ProductReview from "@/components/ProductReview";
-// import { Button } from "@/components/ui/button";
-// import { useSingleProductQuery } from "@/redux/features/products/productsApi";
-
 import { Button } from "../components/ui/button";
-
 import { useNavigate, useParams } from "react-router-dom";
 import {
   useBookEditMutation,
@@ -12,13 +7,11 @@ import {
 } from "../redux/features/books/booksApi";
 import BookReview from "../components/BookReview";
 import { useState } from "react";
-
 import Modal from "react-modal";
 import { useForm } from "react-hook-form";
 import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
 import { toast } from "../components/ui/use-toast";
-// import { AddBookForm } from "../components/AddBookForm";
 
 interface AddBookFormInputs {
   title: string;
@@ -33,16 +26,13 @@ export default function BookDetails() {
   const [deleteBook] = useDeleteBookMutation();
   const [bookEdit] = useBookEditMutation();
   const navigate = useNavigate();
-
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm<AddBookFormInputs>();
-
   const onSubmit = async (data: AddBookFormInputs) => {
     const result = await bookEdit({ id, data });
     if (result) {
@@ -53,7 +43,6 @@ export default function BookDetails() {
       reset();
     }
   };
-
   const handleDeleteBook = async () => {
     try {
       await deleteBook(id);
@@ -104,9 +93,7 @@ export default function BookDetails() {
           )}
         </ul>
       </div>
-
       {<BookReview id={id!} />}
-
       <Modal
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
@@ -115,7 +102,6 @@ export default function BookDetails() {
         <div className="flex justify-center my-4">
           <h3 className="font-bold text-lg ">Edit Book: {book?.title} </h3>
         </div>
-
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid gap-2">
             <div className="grid gap-1">
