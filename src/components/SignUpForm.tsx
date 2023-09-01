@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { createUser } from "../redux/features/users/usersSlice";
 import { useAppDispatch } from "../redux/hook";
 import { useNavigate } from "react-router-dom";
+import { toast } from "./ui/use-toast";
 
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -29,6 +30,9 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
 
   const onSubmit = (data: SignupFormInputs) => {
     dispatch(createUser({ email: data.email, password: data.password }));
+    toast({
+      description: "Congratulations! Now, You're a new user",
+    });
     navigate("/");
   };
 
