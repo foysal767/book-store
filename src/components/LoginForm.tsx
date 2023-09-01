@@ -1,7 +1,5 @@
 "use client";
-
 import * as React from "react";
-
 import { cn } from "../lib/utils";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
@@ -12,7 +10,6 @@ import { loginUser } from "../redux/features/users/usersSlice";
 import { useNavigate } from "react-router-dom";
 
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
-
 interface LoginFormInputs {
   email: string;
   password: string;
@@ -30,6 +27,7 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
   const navigate = useNavigate();
   const onSubmit = (data: LoginFormInputs) => {
     dispatch(loginUser({ email: data.email, password: data.password }));
+    navigate("/");
   };
   React.useEffect(() => {
     if (user.email && !isLoading) {
